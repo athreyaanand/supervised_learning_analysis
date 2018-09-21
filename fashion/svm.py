@@ -22,6 +22,7 @@ train_y = train[label]
 test_x = test.drop('label', axis = 1)
 test_y = test[label]
 
+'''
 training_accuracy = []
 validation_accuracy = []
 test_accuracy = []
@@ -57,14 +58,16 @@ plt.legend(loc='best')
 plt.title('Kernel type versus Accuracy (Fashion)')
 fig.savefig('images/svm_kernel.png')
 plt.close(fig)
+'''
 
 training_accuracy = []
 validation_accuracy = []
 test_accuracy = []
 training_size = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
+
 for size in training_size:
-    clf = svm.SVC(kernel='rbf', random_state=1)
+    clf = svm.SVC(kernel='poly', degree=2, random_state=1)
     t_train, trsh = train_test_split(train, test_size = 1-size)
 
     t_train_x = t_train.drop('label', axis = 1)
@@ -80,6 +83,7 @@ for size in training_size:
     test_accuracy.append(accuracy_score(test_y, clf.predict(test_x)))
 
 fig = plt.figure()
+plt.style.use('Solarize_Light2')
 line1, = plt.plot(training_size, training_accuracy, 'r', label="Training Accuracy")
 line2, = plt.plot(training_size, validation_accuracy, 'b', label="Cross Validation Score")
 line1, = plt.plot(training_size, test_accuracy, 'g', label="Testing Accuracy")

@@ -58,7 +58,7 @@ line2, = plt.plot(training_size, validation_accuracy, 'b', label="Cross Validati
 line1, = plt.plot(training_size, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Training Set Size (%)')
 plt.ylabel('Accuracy')
-plt.title('Training size versus Accuracy (Fashions)')
+plt.title('Training size versus Accuracy (Fashion)')
 plt.legend(loc='best')
 fig.savefig('images/dtree_trainingSize.png')
 plt.show()
