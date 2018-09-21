@@ -9,17 +9,17 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
 
-dataset = pd.read_csv("letter.csv")
+dataset = pd.read_csv("fashion.csv")
 
 labelencoder=LabelEncoder()
-dataset['lettr'] = labelencoder.fit_transform(dataset['lettr'])
+dataset['label'] = labelencoder.fit_transform(dataset['label'])
 
 train, test = train_test_split(dataset, test_size = 0.20, random_state = 1)
 
-label = 'lettr'
-train_x = train.drop('lettr', axis = 1)
+label = 'label'
+train_x = train.drop('label', axis = 1)
 train_y = train[label]
-test_x = test.drop('lettr', axis = 1)
+test_x = test.drop('label', axis = 1)
 test_y = test[label]
 
 training_accuracy = []
@@ -45,7 +45,7 @@ plt.plot(layer_values, training_accuracy, 'r', label="Training Accuracy")
 plt.plot(layer_values, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Hidden Layer Number')
 plt.ylabel('Accuracy')
-plt.title('Number of Hidden Layer\'s versus Accuracy (Letter) (32 neurons)')
+plt.title('Number of Hidden Layer\'s versus Accuracy (Fashion) (32 neurons)')
 plt.legend(loc='best')
 fig.savefig('images/nn_hidden.png')
 plt.close(fig)
@@ -90,7 +90,7 @@ for size in training_size:
     clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=hiddens, random_state=1)
     t_train, trsh = train_test_split(train, test_size = 1-size)
 
-    t_train_x = t_train.drop('lettr', axis = 1)
+    t_train_x = t_train.drop('label', axis = 1)
     t_train_y = t_train[label]
 
     clf.fit(t_train_x, t_train_y)
@@ -106,7 +106,7 @@ plt.plot(training_size, training_accuracy, 'r', label="Training Accuracy")
 plt.plot(training_size, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Training Set Size (%)')
 plt.ylabel('Accuracy')
-plt.title('Training size versus Accuracy (Letter) (0 Hidden)')
+plt.title('Training size versus Accuracy (Fashion) (0 Hidden)')
 plt.legend(loc='best')
 fig.savefig('images/nn_trainingSize.png')
 plt.close(fig)

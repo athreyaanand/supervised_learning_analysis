@@ -10,17 +10,17 @@ from sklearn.model_selection import cross_val_score
 from sklearn.datasets import make_hastie_10_2
 from sklearn.ensemble import GradientBoostingClassifier
 
-dataset = pd.read_csv("letter.csv")
+dataset = pd.read_csv("fashion.csv")
 
 labelencoder=LabelEncoder()
-dataset['lettr'] = labelencoder.fit_transform(dataset['lettr'])
+dataset['label'] = labelencoder.fit_transform(dataset['label'])
 
 train, test = train_test_split(dataset, test_size = 0.20, random_state = 1)
 
-label = 'lettr'
-train_x = train.drop('lettr', axis = 1)
+label = 'label'
+train_x = train.drop('label', axis = 1)
 train_y = train[label]
-test_x = test.drop('lettr', axis = 1)
+test_x = test.drop('label', axis = 1)
 test_y = test[label]
 
 training_accuracy = []
@@ -46,7 +46,7 @@ line1, = plt.plot(n_estim, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Number of Estimators')
 plt.ylabel('Accuracy')
 plt.legend(loc='best')
-plt.title('Number of Estimators versus Accuracy (Letter)')
+plt.title('Number of Estimators versus Accuracy (Fashion)')
 fig.savefig('images/bosting_estimator.png')
 plt.close(fig)
 
@@ -59,7 +59,7 @@ for size in training_size:
     clf = AdaBoostClassifier(n_estimators=50, random_state=1) 
     t_train, trsh = train_test_split(train, test_size = 1-size)
 
-    t_train_x = t_train.drop('lettr', axis = 1)
+    t_train_x = t_train.drop('label', axis = 1)
     t_train_y = t_train[label]
 
     clf.fit(t_train_x, t_train_y)
@@ -78,7 +78,7 @@ line2, = plt.plot(training_size, validation_accuracy, 'b', label="Cross Validati
 line1, = plt.plot(training_size, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Training Set Size (%)')
 plt.ylabel('Accuracy')
-plt.title('Training size versus Accuracy (Letter)')
+plt.title('Training size versus Accuracy (Fashion)')
 plt.legend(loc='best')
 fig.savefig('images/bosting_trainingSize.png')
 plt.close(fig)

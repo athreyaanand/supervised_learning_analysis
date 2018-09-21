@@ -18,17 +18,14 @@ def prune_index(inner_tree, index, threshold):
         prune_index(inner_tree, inner_tree.children_left[index], threshold)
         prune_index(inner_tree, inner_tree.children_right[index], threshold)
 
-dataset = pd.read_csv("letter.csv")
-
-labelencoder=LabelEncoder()
-dataset['lettr'] = labelencoder.fit_transform(dataset['lettr'])
+dataset = pd.read_csv("fashion.csv")
 
 train, test = train_test_split(dataset, test_size = 0.20, random_state = 1)
 
-label = 'lettr'
-train_x = train.drop('lettr', axis = 1)
+label = 'label'
+train_x = train.drop('label', axis = 1)
 train_y = train[label]
-test_x = test.drop('lettr', axis = 1)
+test_x = test.drop('label', axis = 1)
 test_y = test[label]
 
 training_accuracy = []
@@ -40,7 +37,7 @@ for size in training_size:
     clf = DecisionTreeClassifier(max_features='auto', random_state=1)
     t_train, trsh = train_test_split(train, test_size = 1-size)
 
-    t_train_x = t_train.drop('lettr', axis = 1)
+    t_train_x = t_train.drop('label', axis = 1)
     t_train_y = t_train[label]
 
     clf.fit(t_train_x, t_train_y)
@@ -61,7 +58,7 @@ line2, = plt.plot(training_size, validation_accuracy, 'b', label="Cross Validati
 line1, = plt.plot(training_size, test_accuracy, 'g', label="Testing Accuracy")
 plt.xlabel('Training Set Size (%)')
 plt.ylabel('Accuracy')
-plt.title('Training size versus Accuracy (Letters)')
+plt.title('Training size versus Accuracy (Fashions)')
 plt.legend(loc='best')
 fig.savefig('images/dtree_trainingSize.png')
 plt.show()
