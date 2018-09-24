@@ -50,7 +50,7 @@ plt.legend(loc='best')
 fig.savefig('images/nn_hidden.png')
 plt.close(fig)
 
-# For the neural network, experiment on different number of neurons
+'''
 training_accuracy = []
 validation_accuracy = []
 test_accuracy = []
@@ -77,8 +77,8 @@ plt.title('Number of Neurons\'s versus Accuracy')
 plt.legend(loc='best')
 fig.savefig('images/nn_neuron.png')
 plt.close(fig)
+'''
 
-# After finding the right hidden layer value, experiment on training set size
 training_accuracy = []
 test_accuracy = []
 training_size = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]

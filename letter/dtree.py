@@ -42,10 +42,10 @@ for size in training_size:
 
     t_train_x = t_train.drop('lettr', axis = 1)
     t_train_y = t_train[label]
+    
+    print 'Training Size: ', size*100, '%'
 
     clf.fit(t_train_x, t_train_y)
-
-    print 'Training Size: ', size*100, '%'
 
     training_accuracy.append(accuracy_score(t_train_y, clf.predict(t_train_x)))
     cv = cross_val_score(clf, t_train_x, t_train_y, cv=7).mean()
@@ -68,6 +68,6 @@ plt.show()
 plt.close(fig)
 
 print "PRUNING"
-print(sum(clf.tree_.children_left < 0))
+print 'Before: ', sum(clf.tree_.children_left < 0)
 prune_index(clf.tree_, 0, 5)
-print(sum(clf.tree_.children_left < 0))
+print 'After: ', sum(clf.tree_.children_left < 0)
